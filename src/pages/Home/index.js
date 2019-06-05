@@ -1,21 +1,12 @@
 import React from 'react';
 
-import AsideMenu from '../../components/AsideMenu';
 import MoviesList from '../../components/MoviesList';
-
-import './styles.css';
+import Header from '../../components/Header';
 
 const Home = () => (
   <div>
-    <header>
-      <nav>
-        <div className="logo">
-          <p>YourMovies</p>
-        </div>
-      </nav>
-    </header>
+    <Header />
     <div className="container">
-      <AsideMenu />
       <MoviesList />
     </div>
   </div>

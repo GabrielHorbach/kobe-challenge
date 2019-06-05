@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Movie from '../Movie';
 
 import api from '../../services/api';
+import { API_KEY } from '../../constants';
 
 import './styles.css';
 
@@ -11,8 +12,12 @@ export default class MoviesList extends Component {
     movies: []
   }
 
+  shouldComponentUpdate(netxProps, nextState) {
+    return !(this.state.movies === nextState.movies)
+  }
+
   async componentDidMount() {
-    const response = await api.get('/discover/movie?&api_key=c5850ed73901b8d268d0898a8a9d8bff');
+    const response = await api.get(`/discover/movie?&api_key=${API_KEY}`);
 
     this.setState({
       movies: response.data.results
@@ -21,8 +26,8 @@ export default class MoviesList extends Component {
 
   renderMovies() {
     return (
-      this.state.movies.map(movie => (
-        <Movie movie={movie} />
+      this.state.movies.map((movie, i) => (
+        <Movie key={i} movie={movie} />
       ))
     );
   }
@@ -30,6 +35,7 @@ export default class MoviesList extends Component {
   render() {
     return (
       <div className="movieList">
+        <div className="wrapper"></div>
         {this.renderMovies()}
       </div>
     );

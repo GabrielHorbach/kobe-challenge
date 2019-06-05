@@ -1,24 +1,21 @@
 .asideMenu {
-  max-width: 15%;
-  height: 92vh;
-  background: #f4f4f4;
+  width: 90%;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  align-items: center;
   padding: 1rem;
 }
 
-.search {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.search input {
+.asideMenu input {
   background: #fff;
-  width: 100%;
+  width: 50%;
   padding: .5rem 1rem;
   border-radius: 2px;
   border: none;
   border: 1px solid #e6e6e6;
+}
+
+@media (max-width: 768px) {
+  .asideMenu input {
+    width: 70%;
+  }
 }
