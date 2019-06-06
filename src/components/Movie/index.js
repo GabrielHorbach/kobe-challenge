@@ -13,22 +13,39 @@ class Movie extends Component {
     backdropPath: '',
     posterPath: '',
     overview: '',
-    releaseDate: ''
+    releaseDate: '',
+    imageLink: ''
   }
 
-  async componentDidMount() {
-    const response = await api.get(`/movie/${this.props.movie.id}?api_key=${API_KEY}`);
-    const data = response.data;
+  getMovieData = async (movieId) => {
+    await api.get(`/movie/${movieId}?api_key=${API_KEY}`)
+      .then(response => {
+        const data = response.data;
 
-    this.setState({
-      movieId: data.id,
-      title: data.title,
-      backdropPath: data.backdrop_path,
-      posterPath: data.poster_path,
-      overview: data.overview,
-      releaseDate: new Date(data.release_date).toLocaleDateString("pt-BR"),
-      genres: data.genres.map(genre => { return genre.name }).join(', ')
-    });
+        this.setState({
+          movieId: data.id,
+          title: data.title,
+          backdropPath: data.backdrop_path,
+          posterPath: data.poster_path,
+          overview: data.overview,
+          releaseDate: new Date(data.release_date).toLocaleDateString("pt-BR"),
+          genres: data.genres.map(genre => { return genre.name }).join(', '),
+          imageLink: `https://image.tmdb.org/t/p/w780/${data.backdrop_path}?api_key=${API_KEY}`
+        });
+      }).catch(error => {
+        console.log(error);
+      });
+  }
+
+  componentDidMount() {
+    this.getMovieData(this.props.movie.id);
+  }
+
+  componentWillReceiveProps(props) {
+    const { movie } = this.props;
+    if (props.movie !== movie) {
+      this.getMovieData(props.movie.id);
+    }
   }
 
   showDetails() {
@@ -39,8 +56,6 @@ class Movie extends Component {
   }
 
   render() {
-    const link = `https://image.tmdb.org/t/p/w500/${this.state.backdropPath}?api_key=${API_KEY}`;
-
     return (
       <div className='movieItem'>
         <div className="title">
@@ -48,7 +63,11 @@ class Movie extends Component {
         </div>
         <div className="movieContent">
           <div className="left">
-            <img src={link} alt="Movie's logo" onClick={() => { this.showDetails() }} />
+            {
+              this.state.backdropPath
+                ? <img src={this.state.imageLink} alt="Movie's logo" onClick={() => { this.showDetails() }} />
+                : <h1>No backdrop found</h1>
+            }
           </div>
           <div className="right">
             <p><strong>Genres: </strong>{this.state.genres}</p>
