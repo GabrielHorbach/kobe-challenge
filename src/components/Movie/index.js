@@ -44,6 +44,8 @@ class Movie extends Component {
   }
 
   showDetails() {
+    this.props.setIfNeedRedirect(true);
+
     this.props.history.push({
       pathname: `/movie/${this.state.movieId}`,
       state: this.state

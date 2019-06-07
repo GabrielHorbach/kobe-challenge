@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-import Header from '../../components/Header';
 import Detail from '../../components/Detail';
 
 import { API_KEY } from '../../constants';
@@ -15,12 +14,12 @@ const MovieDetail = (props) => {
   }
 
   return (
-    <div>
-      <Header />
+    <Fragment>
       <div className="container">
         <Detail renderPoster={renderPoster} movie={movie} />
       </div>
-    </div>)
+    </Fragment>
+  )
 }
 
 export default MovieDetail;

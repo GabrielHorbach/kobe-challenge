@@ -1,0 +1,25 @@
+.errorMessage {
+  width: 100%;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 3px;
+  box-shadow: 3px 3px 9px #b3b0b0;
+  transition: linear .1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10% auto
+}
+
+@media (max-width: 680px) {
+  .errorMessage {
+    font-size: .6rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .errorMessage {
+    font-size: .5rem;
+  }
+}
