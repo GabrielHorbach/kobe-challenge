@@ -5,20 +5,28 @@ import MoviesList from '../../components/MoviesList';
 import Header from '../../components/Header';
 
 import api from '../../services/api';
-import { URL_LIST } from '../../constants';
+import { API_KEY } from '../../constants';
 
 export default class Home extends Component {
   state = {
-    movies: []
+    movies: [],
+    genres: []
   }
 
   componentDidMount() {
     this.handleSearch(localStorage.getItem("url"));
+    this.getGenres();
   }
 
-  handleSearch = async (url) => {
-    let newUrl = url || URL_LIST;
+  getGenres = async () => {
+    await api.get(`/genre/movie/list?api_key=${API_KEY}`)
+      .then(response => {
+        this.setState({ genres: response.data.genres })
+      })
+      .catch(err => console.log(err));
+  }
 
+  handleSearch = async (newUrl) => {
     localStorage.setItem("url", newUrl);
 
     const response = await api.get(newUrl);
@@ -30,13 +38,16 @@ export default class Home extends Component {
   renderMovies = () => {
     return (
       this.state.movies.map((movie, i) => (
-        <Movie key={i} movie={movie} />
+        <Movie
+          key={i}
+          movie={movie}
+          genres={this.state.genres}
+        />
       ))
     );
   }
 
   render() {
-    console.log(localStorage.getItem("url"));
     return (
       <div>
         <Header handleSearch={this.handleSearch} />

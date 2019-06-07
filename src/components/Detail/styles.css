@@ -48,11 +48,22 @@
 }
 
 @media (max-width: 680px) {
-  .detailMovie {
-    display: grid;
-  }
-  
+    .detailMovie {
+      display: flex;
+      flex-direction: column;
+    }
+
   .detailMovie .posterWrapper {
-    width: 35%;
+    width: 55%;
+    margin: auto;
+  }
+
+  .detailMovie .movieInfo {
+    width: 100%;
+    padding: 1rem 1rem 0;
+  }
+
+  .movieInfo .title {
+    text-align: center;
   }
 }

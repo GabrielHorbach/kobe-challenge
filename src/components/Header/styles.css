@@ -61,6 +61,12 @@ header nav button:hover {
 
 @media (max-width: 768px) {
   .asideMenu input {
-    width: 70%;
+    width: 40%;
+  }
+}
+
+@media (max-width: 680px) {
+  .asideMenu input {
+    width: 55%;
   }
 }

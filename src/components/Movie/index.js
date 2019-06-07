@@ -4,7 +4,6 @@ import { withRouter } from "react-router";
 import './styles.css';
 
 import { API_KEY } from '../../constants';
-import api from '../../services/api';
 
 class Movie extends Component {
   state = {
@@ -14,37 +13,33 @@ class Movie extends Component {
     posterPath: '',
     overview: '',
     releaseDate: '',
-    imageLink: ''
+    imageLink: '',
+    genres: ''
   }
 
-  getMovieData = async (movieId) => {
-    await api.get(`/movie/${movieId}?api_key=${API_KEY}`)
-      .then(response => {
-        const data = response.data;
+  getMovieData = (props) => {
+    const { movie, genres } = props;
 
-        this.setState({
-          movieId: data.id,
-          title: data.title,
-          backdropPath: data.backdrop_path,
-          posterPath: data.poster_path,
-          overview: data.overview,
-          releaseDate: new Date(data.release_date).toLocaleDateString("pt-BR"),
-          genres: data.genres.map(genre => { return genre.name }).join(', '),
-          imageLink: `https://image.tmdb.org/t/p/w780/${data.backdrop_path}?api_key=${API_KEY}`
-        });
-      }).catch(error => {
-        console.log(error);
-      });
+    return this.setState({
+      movieId: movie.id,
+      title: movie.title,
+      backdropPath: movie.backdrop_path,
+      posterPath: movie.poster_path,
+      overview: movie.overview,
+      releaseDate: new Date(movie.release_date).toLocaleDateString("pt-BR"),
+      genres: genres.filter(genre => { return movie.genre_ids.includes(genre.id) }).map(genre => { return genre.name }).join(', '),
+      imageLink: `https://image.tmdb.org/t/p/w780/${movie.backdrop_path}?api_key=${API_KEY}`
+    });
   }
 
   componentDidMount() {
-    this.getMovieData(this.props.movie.id);
+    this.getMovieData(this.props);
   }
 
   componentWillReceiveProps(props) {
     const { movie } = this.props;
     if (props.movie !== movie) {
-      this.getMovieData(props.movie.id);
+      this.getMovieData(props);
     }
   }
 
