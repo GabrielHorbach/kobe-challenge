@@ -1,0 +1,72 @@
+header {
+  width: 100%;
+  top:0;
+  position: fixed;
+  z-index: 2;
+}
+
+header nav {
+  height: 8vh;
+  background: #2c2c2c;
+  display: flex;
+}
+
+.logo {
+  width: 10%;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.logo {
+  justify-content: flex-end
+}
+
+header nav p {
+  color: #fff;
+}
+
+header nav button {
+  padding: .5rem 1rem;
+  border: none;
+  border-radius: 2px;
+  border: 1px solid #e6e6e6;
+  border-left: none;
+  background: #fff;
+  margin-left: -5px;
+  cursor: pointer
+}
+
+header nav button:hover {
+  color: #c2c2c2
+}
+
+.asideMenu {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.asideMenu input {
+  background: #fff;
+  width: 50%;
+  padding: .5rem 1rem;
+  border-radius: 2px;
+  border: none;
+  border: 1px solid #e6e6e6;
+  border-right: none;
+}
+
+@media (max-width: 768px) {
+  .asideMenu input {
+    width: 40%;
+  }
+}
+
+@media (max-width: 680px) {
+  .asideMenu input {
+    width: 55%;
+  }
+}

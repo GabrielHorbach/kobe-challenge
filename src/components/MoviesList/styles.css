@@ -1,0 +1,25 @@
+.movieList {
+  display: grid;
+  width: 100%;
+  grid-gap: 1rem;
+  padding: 0 1rem;
+}
+
+.movieList .wrapper {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+@media (min-width: 710px) and (max-width: 1150px) {
+  .movieList .wrapper {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}
+
+@media (max-width: 710px) {
+  .movieList .wrapper {
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+}

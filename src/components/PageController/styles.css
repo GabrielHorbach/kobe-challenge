@@ -1,0 +1,22 @@
+.pageController {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0 1rem;
+}
+
+.pageController button {
+  border: none;
+  background: transparent;
+  padding: .5rem 1rem;
+  border-radius: 3px;
+  color: #2c2c2c;
+  cursor: pointer;
+  margin-right: .5rem;
+}
+
+.pageController button:hover {
+  opacity: .6
+}
